@@ -25,7 +25,7 @@
     <string name="button_square_degree">x^2</string>
     <string name="button_degree">x^y</string>
     <string name="button_ln">ln</string>
-    <string name="button_delete">delete</string>
+    <string name="button_delete">del</string>
     <string name="button_clear">C</string>
     <string name="button_mod">mod</string>
     <string name="button_exp">e</string>
