@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.button_clear:
                         number_1 = "0";
                         number_2 = "0";
-                        current_operation = null;
+                        current_operation = "";
                         editTextNumber.setText("");
                         currentOperationView.setText("");
                         break;
