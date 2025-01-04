@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Beetles</string>
+    <string name="hi">Привет,</string>
+    <string name="default_player">Игрок</string>
+    <string name="start_button_text">Старт игры</string>
+    <string name="settings_button_text">Настройки</string>
+    <string name="exit_button_text">Выход</string>
+    <string name="settings_main_text">Настройки</string>
+    <string name="player_input_text">Имя игрока</string>
+    <string name="music_volume">Музыка включена</string>
+    <string name="sounds_volume">Звуки включены</string>
+    <string name="player_input_hint">Имя игрока...</string>
+    <string name="button_save_settings">Сохранить</string>
+    <string name="button_cancel_settings">Отменить</string>
+    <string name="beetles_move_speed">Скорость движения жуков</string>
+    <string name="beetles_respawn_speed">Скорость появления жуков</string>
+</resources>

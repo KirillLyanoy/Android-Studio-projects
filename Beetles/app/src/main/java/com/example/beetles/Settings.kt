@@ -1,0 +1,7 @@
+package com.example.beetles
+
+import java.io.Serializable
+
+class Settings (var playerName: String = "Игрок", var musicVolume: Boolean = true, var soundVolume: Boolean = true,
+                var beetlesMoveSpeed: Int = 10, var beetlesRespawnSpeed: Int = 10): Serializable {
+}
