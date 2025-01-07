@@ -2,6 +2,7 @@ package com.example.beetles
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.Button
 import android.widget.SeekBar
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         val settings_button = findViewById<Button>(R.id.settings_button)
         val exit_button = findViewById<Button>(R.id.exit_button)
 
+
         playerName.text = currentPlayerSettings.playerName
 
         start_button.setOnClickListener {
@@ -50,6 +52,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         exit_button.setOnClickListener {
+            finishAffinity()
+            System.exit(0)
         }
     }
 }

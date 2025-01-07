@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settings_main_text"
-        android:textSize="36dp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,13 +36,12 @@
         <EditText
             android:id="@+id/inputPlayerName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="58dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:inputType="text"
-            android:minHeight="48dp"
             android:text="@string/default_player"
             android:textAlignment="center" />
 
@@ -62,6 +61,32 @@
             android:layout_marginBottom="10dp"
             android:checked="true"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/beetlex_max"/>
+
+            <EditText
+                android:id="@+id/beetlesMax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text=""
+                android:textAlignment="center"/>
+
+
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/beetlesMoveSpeed"
             android:layout_width="match_parent"
@@ -73,9 +98,7 @@
             android:id="@+id/beetlesMoveSpeedBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:min="1"
-            android:max="500"/>
+            android:layout_marginBottom="10dp"/>
 
         <TextView
             android:id="@+id/beetlesRespawnSpeed"
@@ -88,9 +111,7 @@
             android:id="@+id/beetlesRespawnSpeedBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:min="1"
-            android:max="1000"/>
+            android:layout_marginBottom="20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
