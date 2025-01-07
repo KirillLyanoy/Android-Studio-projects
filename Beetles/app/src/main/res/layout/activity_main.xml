@@ -62,6 +62,13 @@
             android:backgroundTint="@color/buttons"/>
 
         <Button
+            android:id="@+id/stats_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/stats"
+            android:backgroundTint="@color/buttons"/>
+
+        <Button
             android:id="@+id/exit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

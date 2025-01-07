@@ -17,17 +17,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import org.json.JSONObject
+import java.io.File
+import java.io.FileWriter
+import java.util.concurrent.CopyOnWriteArrayList
 
 @Suppress("DEPRECATION")
 class GameActivity : AppCompatActivity() {
     private lateinit var drawView: Draw
     private var isRunning = true
-    var insects: MutableList<Insect> = mutableListOf()
+    var insects: MutableList<Insect> = CopyOnWriteArrayList()
     var beetlesKilled: Int = 0
     lateinit var mediaPlayer: MediaPlayer
 
     lateinit var soundPool: SoundPool
-
+    lateinit var currentPlayerSettings: Settings
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +39,7 @@ class GameActivity : AppCompatActivity() {
         val screenWidth = this.resources.displayMetrics.widthPixels
         val screenHeight = this.resources.displayMetrics.heightPixels
 
-        val currentPlayerSettings = intent.getSerializableExtra("settings") as? Settings
+        currentPlayerSettings = (intent.getSerializableExtra("settings") as? Settings)!!
 
         mediaPlayer = MediaPlayer.create(this, R.raw.music)
         if (currentPlayerSettings!!.musicVolume) {
@@ -182,28 +186,24 @@ class GameActivity : AppCompatActivity() {
         for (insect in insects) insect.isLiving = false
         soundPool?.release()
         mediaPlayer.stop()
+        writePlayerToFile(currentPlayerSettings.playerName, beetlesKilled)
     }
     class Draw(context: Context, val insects: MutableList<Insect>, var beetlesKilled: Int, val screenHeight: Int) : View(context) {
         override fun onDraw(canvas: Canvas) {
-            var insectsClone = insects.toMutableList()
             var paint = Paint()
             paint.textSize = 36F
             canvas.drawText("Раздавлено жуков: $beetlesKilled", 40F,
                 (screenHeight - 10).toFloat(), paint)
-            for (insect in insectsClone) {
+            val liveInsects = mutableListOf<Insect>()
+            for (insect in insects) {
                 if (!insect.isDecomposing) {
-                    val rotatedBitmap: Bitmap =
-                        rotateBitmap(insect.currentMoveImage, insect.directionAngle)
-                    canvas.drawBitmap(
-                        rotatedBitmap,
-                        insect.coordX.toFloat(),
-                        insect.coordY.toFloat(),
-                        null
-                    )
-                } else {
-                    insects.remove(insect)
+                    val rotatedBitmap: Bitmap = rotateBitmap(insect.currentMoveImage, insect.directionAngle)
+                    canvas.drawBitmap(rotatedBitmap, insect.coordX.toFloat(), insect.coordY.toFloat(), null)
+                    liveInsects.add(insect)
                 }
             }
+            insects.clear()
+            insects.addAll(liveInsects)
             super.onDraw(canvas)
         }
 
@@ -212,5 +212,14 @@ class GameActivity : AppCompatActivity() {
             matrix.postRotate(directionAngle.toFloat())
             return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
         }
+    }
+
+    private fun writePlayerToFile(playerName: String, beetlesKilled: Int) {
+        var file = File(filesDir,"playersScore.txt")
+
+        if (!file.exists()) file.createNewFile()
+        val fileWriter = FileWriter(file, true)
+        fileWriter.append("$playerName $beetlesKilled\n")
+        fileWriter.close()
     }
 }

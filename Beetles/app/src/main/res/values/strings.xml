@@ -15,4 +15,8 @@
     <string name="beetles_move_speed">Скорость движения жуков</string>
     <string name="beetles_respawn_speed">Скорость появления жуков</string>
     <string name="beetlex_max">Максимальное количество жуков: </string>
+    <string name="stats">Статистика</string>
+    <string name="return_button">Вернуться</string>
+    <string name="top_players">Рейтинг игроков</string>
+    <string name="empty_list">Список пуст</string>
 </resources>
