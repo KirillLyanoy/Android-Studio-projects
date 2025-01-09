@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -40,8 +41,8 @@ class SettingsActivity : AppCompatActivity() {
 
         beetlesMoveSpeed.min = 10
         beetlesMoveSpeed.max = 200
-        beetlesRespawnSpeed.min = 500
-        beetlesRespawnSpeed.max = 3000
+        beetlesRespawnSpeed.min = 100
+        beetlesRespawnSpeed.max = 2750
 
         val currentPlayerSettings = intent.getSerializableExtra("settings") as? Settings
 
@@ -57,17 +58,21 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         saveSettingsButton.setOnClickListener {
-            if (currentPlayerSettings != null) {
-                currentPlayerSettings.playerName = inputPlayerName.text.toString()
-                currentPlayerSettings.musicVolume = musicVolume.isChecked
-                currentPlayerSettings.soundVolume = soundVolume.isChecked
-                currentPlayerSettings.beetlesMoveSpeed = beetlesMoveSpeed.progress
-                currentPlayerSettings.beetlesRespawnSpeed = beetlesRespawnSpeed.progress
-                currentPlayerSettings.beetlesMax = beetlesMax.text.toString().toInt()
+            if (inputPlayerName.text.toString().contains(" ")) {
+                Toast.makeText(this, "Имя игрока не может содержать пробел", Toast.LENGTH_SHORT).show()
+            } else {
+                if (currentPlayerSettings != null) {
+                    currentPlayerSettings.playerName = inputPlayerName.text.toString()
+                    currentPlayerSettings.musicVolume = musicVolume.isChecked
+                    currentPlayerSettings.soundVolume = soundVolume.isChecked
+                    currentPlayerSettings.beetlesMoveSpeed = beetlesMoveSpeed.progress
+                    currentPlayerSettings.beetlesRespawnSpeed = beetlesRespawnSpeed.progress
+                    currentPlayerSettings.beetlesMax = beetlesMax.text.toString().toInt()
+                }
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("settings", currentPlayerSettings)
+                startActivity(intent)
             }
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("settings", currentPlayerSettings)
-            startActivity(intent)
         }
 
         cancelSettingsButton.setOnClickListener {
